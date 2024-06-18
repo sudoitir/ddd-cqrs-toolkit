@@ -5,6 +5,10 @@ import java.util.Map;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.GenericTypeResolver;
 
+/**
+ * Registry holds the mapping between a query and its handler. The registry should always be
+ * injected, by the spring framework.
+ */
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class QueryRegistry {
 
