@@ -1,4 +1,4 @@
-package io.github.sudoitir.dddcqrstoolkit.cqs;
+package io.github.sudoitir.dddcqrstoolkit.cqs.query;
 
 public interface QueryBus {
 

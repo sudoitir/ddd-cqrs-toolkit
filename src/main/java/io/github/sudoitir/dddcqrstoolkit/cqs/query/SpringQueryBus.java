@@ -1,6 +1,8 @@
-package io.github.sudoitir.dddcqrstoolkit.cqs;
+package io.github.sudoitir.dddcqrstoolkit.cqs.query;
 
-@SuppressWarnings("unchecked")
+import org.springframework.stereotype.Component;
+
+@Component
 public class SpringQueryBus implements QueryBus {
 
     private final QueryRegistry queryRegistry;
@@ -9,10 +11,11 @@ public class SpringQueryBus implements QueryBus {
         this.queryRegistry = queryRegistry;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public <R, Q extends Query<R>> R executeQuery(Q query) {
-        QueryHandler<R, Q> queryHandler = (QueryHandler<R, Q>) queryRegistry.getQuery(
-                query.getClass());
+        QueryHandler<R, Q> queryHandler = (QueryHandler<R, Q>) queryRegistry
+                .getQueryHandler(query.getClass());
         return queryHandler.handle(query);
     }
 }
