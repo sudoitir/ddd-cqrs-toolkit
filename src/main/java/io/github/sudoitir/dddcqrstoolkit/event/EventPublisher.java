@@ -12,7 +12,7 @@ public class EventPublisher {
         this.eventPublisher = eventPublisher;
     }
 
-    public void publish(Event event) {
+    public void publish(DomainEvent event) {
         eventPublisher.publishEvent(event);
     }
 }
