@@ -1,6 +1,8 @@
-package io.github.sudoitir.dddcqrstoolkit.cqs;
+package io.github.sudoitir.dddcqrstoolkit.cqs.command;
 
-@SuppressWarnings("unchecked")
+import org.springframework.stereotype.Component;
+
+@Component
 public class SpringCommandBus implements CommandBus {
 
     private final CommandRegistry commandRegistry;
@@ -10,9 +12,10 @@ public class SpringCommandBus implements CommandBus {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <R, C extends Command<R>> R executeCommand(C command) {
-        CommandHandler<R, C> commandHandler = (CommandHandler<R, C>) commandRegistry.getCmd(
-                command.getClass());
+        CommandHandler<R, C> commandHandler = (CommandHandler<R, C>) commandRegistry
+                .getCommandHandler(command.getClass());
         return commandHandler.handle(command);
     }
 

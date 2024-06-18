@@ -1,4 +1,4 @@
-package io.github.sudoitir.dddcqrstoolkit.cqs;
+package io.github.sudoitir.dddcqrstoolkit.cqs.command;
 
 import org.springframework.context.ApplicationContext;
 
