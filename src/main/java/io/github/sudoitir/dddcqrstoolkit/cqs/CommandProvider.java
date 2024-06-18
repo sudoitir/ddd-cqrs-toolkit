@@ -3,6 +3,7 @@ package io.github.sudoitir.dddcqrstoolkit.cqs;
 import org.springframework.context.ApplicationContext;
 
 public class CommandProvider<H extends CommandHandler<?, ?>> {
+
     private final ApplicationContext applicationContext;
     private final Class<H> type;
 
