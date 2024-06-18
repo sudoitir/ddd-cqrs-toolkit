@@ -1,7 +1,7 @@
 package io.github.sudoitir.dddcqrstoolkit.cqs.module;
 
 import jakarta.validation.ConstraintViolation;
-import jakarta.validation.ValidationException;
+import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
 import java.util.Set;
 import org.slf4j.Logger;
@@ -25,11 +25,7 @@ public class ValidationModule implements BeforeExecutionModule, BusTypeProvider 
                 violations.forEach(
                         violation -> logger.error("Validation error: {}", violation.getMessage()));
             }
-            throw new ValidationException(
-                    violations.stream()
-                            .map(ConstraintViolation::getMessage)
-                            .toList()
-                            .toString());
+            throw new ConstraintViolationException(violations);
         }
     }
 

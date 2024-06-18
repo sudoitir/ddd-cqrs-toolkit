@@ -28,6 +28,7 @@
     <java.version>17</java.version>
     <jacoco.version>0.8.12</jacoco.version>
     <vavr.version>0.10.4</vavr.version>
+    <micrometer.version>1.12.3</micrometer.version>
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
     <sonar.dynamicAnalysis>reuseReports</sonar.dynamicAnalysis>
     <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
@@ -58,7 +59,15 @@
       <artifactId>vavr</artifactId>
       <version>${vavr.version}</version>
     </dependency>
-
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-atlas</artifactId>
+      <version>${micrometer.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-aop</artifactId>
+    </dependency>
   </dependencies>
 
   <build>

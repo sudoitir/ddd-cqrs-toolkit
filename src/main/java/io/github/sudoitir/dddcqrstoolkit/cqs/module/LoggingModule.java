@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 public class LoggingModule implements
         BeforeExecutionModule,
         AfterExecutionModule,
-        AfterThrowingExecutionModule,
+        AfterThrowingModule,
         BusTypeProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(LoggingModule.class);

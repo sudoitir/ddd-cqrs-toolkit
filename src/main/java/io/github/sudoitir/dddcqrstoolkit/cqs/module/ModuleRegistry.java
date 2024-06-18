@@ -1,74 +1,58 @@
 package io.github.sudoitir.dddcqrstoolkit.cqs.module;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import org.springframework.stereotype.Component;
 
-@Component
 public class ModuleRegistry {
 
+    private final List<BeforeExecutionModule> beforeExecutionModules;
+    private final List<AfterExecutionModule> afterExecutionModules;
+    private final List<AfterThrowingModule> afterThrowingExecutionModules;
 
-    private final List<BusModule> modules = new ArrayList<>();
+    public ModuleRegistry(BusModule... modules) {
+        List<BeforeExecutionModule> newBeforeExecutionModules = new ArrayList<>();
+        List<AfterExecutionModule> newAfterExecutionModules = new ArrayList<>();
+        List<AfterThrowingModule> newAfterThrowingExecutionModules = new ArrayList<>();
 
-    private List<BeforeExecutionModule> cachedBeforeExecutionModules;
-    private List<AfterExecutionModule> cachedAfterExecutionModules;
-    private List<AfterThrowingExecutionModule> cachedAfterThrowingExecutionModules;
-    private List<BusTypeProvider> cachedBusTypeProviders;
+        for (BusModule module : modules) {
+            if (module instanceof BeforeExecutionModule) {
+                registerModule(newBeforeExecutionModules, (BeforeExecutionModule) module);
+            } else if (module instanceof AfterExecutionModule) {
+                registerModule(newAfterExecutionModules, (AfterExecutionModule) module);
+            } else if (module instanceof AfterThrowingModule) {
+                registerModule(newAfterThrowingExecutionModules,
+                        (AfterThrowingModule) module);
+            } else {
+                throw new UnsupportedOperationException(
+                        MessageFormat.format("Module type {0} not supported!",
+                                module.getClass().getSimpleName()));
+            }
+        }
 
-    public ModuleRegistry registerModule(BusModule module) {
-        modules.add(module);
-        clearCaches();
-        return this;
+        this.beforeExecutionModules = Collections.unmodifiableList(newBeforeExecutionModules);
+        this.afterExecutionModules = Collections.unmodifiableList(newAfterExecutionModules);
+        this.afterThrowingExecutionModules = Collections.unmodifiableList(
+                newAfterThrowingExecutionModules);
     }
 
-    public List<BusModule> getModules() {
-        return modules;
+    private <T extends BusModule> void registerModule(List<T> modules, T moduleToAdd) {
+        if (modules.contains(moduleToAdd)) {
+            throw new IllegalArgumentException("Module already registered: " + moduleToAdd);
+        }
+        modules.add(moduleToAdd);
     }
 
     public List<BeforeExecutionModule> getBeforeExecutionModules() {
-        if (cachedBeforeExecutionModules == null) {
-            cachedBeforeExecutionModules = modules.stream()
-                    .filter(BeforeExecutionModule.class::isInstance)
-                    .map(BeforeExecutionModule.class::cast)
-                    .toList();
-        }
-        return cachedBeforeExecutionModules;
+        return beforeExecutionModules;
     }
 
     public List<AfterExecutionModule> getAfterExecutionModules() {
-        if (cachedAfterExecutionModules == null) {
-            cachedAfterExecutionModules = modules.stream()
-                    .filter(AfterExecutionModule.class::isInstance)
-                    .map(AfterExecutionModule.class::cast)
-                    .toList();
-        }
-        return cachedAfterExecutionModules;
+        return afterExecutionModules;
     }
 
-    public List<AfterThrowingExecutionModule> getAfterThrowingModules() {
-        if (cachedAfterThrowingExecutionModules == null) {
-            cachedAfterThrowingExecutionModules = modules.stream()
-                    .filter(AfterThrowingExecutionModule.class::isInstance)
-                    .map(AfterThrowingExecutionModule.class::cast)
-                    .toList();
-        }
-        return cachedAfterThrowingExecutionModules;
-    }
-
-    public List<BusTypeProvider> getBusTypeProviders() {
-        if (cachedBusTypeProviders == null) {
-            cachedBusTypeProviders = modules.stream()
-                    .filter(BusTypeProvider.class::isInstance)
-                    .map(BusTypeProvider.class::cast)
-                    .toList();
-        }
-        return cachedBusTypeProviders;
-    }
-
-    private void clearCaches() {
-        cachedBeforeExecutionModules = null;
-        cachedAfterExecutionModules = null;
-        cachedAfterThrowingExecutionModules = null;
-        cachedBusTypeProviders = null;
+    public List<AfterThrowingModule> getAfterThrowingModules() {
+        return afterThrowingExecutionModules;
     }
 }
