@@ -1,4 +1,4 @@
-package io.github.sudoitir.dddcqrstoolkit.cqs.command.setup;
+package io.github.sudoitir.dddcqrstoolkit.cqs.setup;
 
 import io.github.sudoitir.dddcqrstoolkit.valueobject.ULID;
 import org.springframework.stereotype.Repository;
