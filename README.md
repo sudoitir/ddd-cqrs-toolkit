@@ -12,8 +12,7 @@ using Spring Framework.
 
 ## Installation
 
-Add the following dependency to your `pom.xml`:
-
+After installing the project with Maven using `mvn install`, add the following dependency to your `pom.xml`:
 ```xml
 
 <dependency>
