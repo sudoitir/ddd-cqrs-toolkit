@@ -1,4 +1,7 @@
-package io.github.sudoitir.dddcqrstoolkit.valueobject;
+package io.github.sudoitir.dddcqrstoolkit.ulid;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -86,6 +89,8 @@ public final class ULID implements Comparable<ULID>, Serializable {
         throw new IllegalArgumentException();
     }
 
+
+
     /**
      * @param mostSignificantBits  The most significant 64 bits of this ULID.
      * @param leastSignificantBits The least significant 64 bits of this ULID.
@@ -153,7 +158,7 @@ public final class ULID implements Comparable<ULID>, Serializable {
         return randomULID(timestamp);
     }
 
-
+    @JsonDeserialize
     public static ULID from(final String ulidString) {
         Objects.requireNonNull(ulidString, "ulidString must not be null!");
         if (ulidString.length() != 26) {
@@ -270,6 +275,7 @@ public final class ULID implements Comparable<ULID>, Serializable {
     }
 
     @Override
+    @JsonSerialize
     public String toString() {
         char[] buffer = new char[26];
 
