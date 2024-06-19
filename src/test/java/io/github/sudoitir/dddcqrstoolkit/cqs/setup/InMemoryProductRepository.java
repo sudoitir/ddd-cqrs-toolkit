@@ -20,6 +20,16 @@ public class InMemoryProductRepository {
         return product;
     }
 
+    public Product update(ULID ulid, Product product) {
+        Product result = products.get(ulid);
+        if (result == null) {
+            throw new IllegalArgumentException("Product not found");
+        }
+        result.setName(product.getName());
+        products.replace(ulid, result);
+        return result;
+    }
+
     public Optional<Product> findById(ULID ulid) {
         return Optional.ofNullable(products.get(ulid));
     }

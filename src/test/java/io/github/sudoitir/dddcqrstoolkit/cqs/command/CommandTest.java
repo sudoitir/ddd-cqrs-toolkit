@@ -46,7 +46,27 @@ class CommandTest {
 
         Product savedProduct = productRepository.findById(result.productId()).orElseGet(Assertions::fail);
         assertThat(savedProduct.getName()).isEqualTo(productName);
+    }
 
+
+    @Test
+    void testUpdateProduct() {
+        CreateProductResult savedProduct = setup();
+
+        String productName = "Update Product";
+
+        UpdateProductCommand command = new UpdateProductCommand(savedProduct.productId(), productName);
+
+        UpdateProductResult result = commandBus.executeCommand(command);
+
+        assertThat(result).isNotNull();
+        assertThat(result.message()).isEqualTo("Product updated successfully");
+    }
+
+    private CreateProductResult setup() {
+        String productName = "Test Product";
+        CreateProductCommand command = new CreateProductCommand(productName);
+        return commandBus.executeCommand(command);
     }
 
 
