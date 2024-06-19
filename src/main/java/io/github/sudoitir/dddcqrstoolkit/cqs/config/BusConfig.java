@@ -7,9 +7,16 @@ import jakarta.validation.Validator;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Configuration
 public class BusConfig {
+
+    @Bean
+    @ConditionalOnMissingBean
+    public LocalValidatorFactoryBean validator() {
+        return new LocalValidatorFactoryBean();
+    }
 
     @Bean
     @ConditionalOnMissingBean

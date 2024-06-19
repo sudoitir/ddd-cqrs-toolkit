@@ -18,11 +18,12 @@ public class ModuleRegistry {
 
         for (BusModule module : modules) {
             if (module instanceof BeforeExecutionModule beforeexecutionmodule) {
-                registerModule(newBeforeExecutionModules, beforeexecutionmodule);
+                newBeforeExecutionModules.add(beforeexecutionmodule);
             } else if (module instanceof AfterExecutionModule afterExecutionModule) {
-                registerModule(newAfterExecutionModules, afterExecutionModule);
+                newAfterExecutionModules.add(afterExecutionModule);
             } else if (module instanceof AfterThrowingModule afterThrowingModule) {
-                registerModule(newAfterThrowingExecutionModules, afterThrowingModule);
+                newAfterThrowingExecutionModules.add(afterThrowingModule);
+
             } else {
                 throw new UnsupportedOperationException(
                         MessageFormat.format("Module type {0} not supported!",
@@ -36,12 +37,6 @@ public class ModuleRegistry {
                 newAfterThrowingExecutionModules);
     }
 
-    private <T extends BusModule> void registerModule(List<T> modules, T moduleToAdd) {
-        if (modules.contains(moduleToAdd)) {
-            throw new IllegalArgumentException("Module already registered: " + moduleToAdd);
-        }
-        modules.add(moduleToAdd);
-    }
 
     public List<BeforeExecutionModule> getBeforeExecutionModules() {
         return beforeExecutionModules;

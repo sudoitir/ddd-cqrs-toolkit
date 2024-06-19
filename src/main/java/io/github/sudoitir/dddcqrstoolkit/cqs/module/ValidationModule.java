@@ -3,9 +3,10 @@ package io.github.sudoitir.dddcqrstoolkit.cqs.module;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
-import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Set;
 
 public class ValidationModule implements BeforeExecutionModule, BusTypeProvider {
 
@@ -23,7 +24,8 @@ public class ValidationModule implements BeforeExecutionModule, BusTypeProvider 
         if (!violations.isEmpty()) {
             if (logger.isDebugEnabled()) {
                 violations.forEach(
-                        violation -> logger.error("Validation error: {}", violation.getMessage()));
+                        violation -> logger.error("Validation error on field '{}': {}", violation.getPropertyPath(),
+                                violation.getMessage()));
             }
             throw new ConstraintViolationException(violations);
         }
