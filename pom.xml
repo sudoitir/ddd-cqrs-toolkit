@@ -12,8 +12,8 @@
   </parent>
 
   <groupId>io.github.sudoitir</groupId>
-  <artifactId>dddcqrs-toolkit</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <artifactId>dddcqrstoolkit</artifactId>
+  <version>1.0.0</version>
   <name>DDD-CQRS Toolkit</name>
   <description>DDD-CQRS Toolkit</description>
 
