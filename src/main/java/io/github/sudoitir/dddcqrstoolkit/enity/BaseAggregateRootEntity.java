@@ -1,6 +1,7 @@
 package io.github.sudoitir.dddcqrstoolkit.enity;
 
 import io.github.sudoitir.dddcqrstoolkit.valueobject.Version;
+
 import java.io.Serializable;
 
 public abstract class BaseAggregateRootEntity<ID extends Serializable> extends BaseEntity<ID> {

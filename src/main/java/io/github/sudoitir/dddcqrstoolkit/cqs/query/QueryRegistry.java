@@ -1,16 +1,15 @@
 package io.github.sudoitir.dddcqrstoolkit.cqs.query;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.GenericTypeResolver;
-import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Registry holds the mapping between a query and its handler. The registry should always be
  * injected, by the spring framework.
  */
-@Component
 public class QueryRegistry {
 
     private final Map<Class<? extends Query<?>>, QueryProvider<?>> queryProviderMap = new HashMap<>();

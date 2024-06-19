@@ -1,8 +1,6 @@
 package io.github.sudoitir.dddcqrstoolkit.cqs.query;
 
-import org.springframework.stereotype.Component;
 
-@Component
 public class SpringQueryBus implements QueryBus {
 
     private final QueryRegistry queryRegistry;

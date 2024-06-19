@@ -1,8 +1,9 @@
 package io.github.sudoitir.dddcqrstoolkit.repository;
 
+import org.springframework.jdbc.core.JdbcTemplate;
+
 import java.util.List;
 import java.util.Optional;
-import org.springframework.jdbc.core.JdbcTemplate;
 
 public abstract class BaseRepository<T, ID> {
     protected final JdbcTemplate jdbcTemplate;

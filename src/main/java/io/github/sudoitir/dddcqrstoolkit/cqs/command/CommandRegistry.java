@@ -1,17 +1,16 @@
 package io.github.sudoitir.dddcqrstoolkit.cqs.command;
 
-import java.util.HashMap;
-import java.util.Map;
 import org.springframework.context.ApplicationContext;
 import org.springframework.core.GenericTypeResolver;
-import org.springframework.stereotype.Component;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
  * Registry holds the mapping between a command and its handler. The registry should always be
  * injected, by the spring framework.
  */
-@Component
 public class CommandRegistry {
 
     private final Map<Class<? extends Command<?>>, CommandProvider<?>> commandProviderMap = new HashMap<>();

@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-io.github.sudoitir.dddcqrstoolkit.cqs.config.BusConfig
+io.github.sudoitir.dddcqrstoolkit.cqs.config.BusAutoConfig

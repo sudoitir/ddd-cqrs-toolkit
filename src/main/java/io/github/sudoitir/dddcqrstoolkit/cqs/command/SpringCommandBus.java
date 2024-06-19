@@ -1,8 +1,5 @@
 package io.github.sudoitir.dddcqrstoolkit.cqs.command;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class SpringCommandBus implements CommandBus {
 
     private final CommandRegistry commandRegistry;
