@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationEvent;
 
 public abstract class DomainEvent extends ApplicationEvent {
 
-    public DomainEvent(final Object source) {
+    protected DomainEvent(final Object source) {
         super(source);
     }
 

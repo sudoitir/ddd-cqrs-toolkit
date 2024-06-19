@@ -14,8 +14,7 @@ public class SpringCommandBus implements CommandBus {
     @Override
     @SuppressWarnings("unchecked")
     public <R, C extends Command<R>> R executeCommand(C command) {
-        CommandHandler<R, C> commandHandler = (CommandHandler<R, C>) commandRegistry
-                .getCommandHandler(command.getClass());
+        CommandHandler<R, C> commandHandler = commandRegistry.getCommandHandler(command.getClass());
         return commandHandler.handle(command);
     }
 

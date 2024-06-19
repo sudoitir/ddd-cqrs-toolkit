@@ -14,8 +14,7 @@ public class SpringQueryBus implements QueryBus {
     @SuppressWarnings("unchecked")
     @Override
     public <R, Q extends Query<R>> R executeQuery(Q query) {
-        QueryHandler<R, Q> queryHandler = (QueryHandler<R, Q>) queryRegistry
-                .getQueryHandler(query.getClass());
+        QueryHandler<R, Q> queryHandler = queryRegistry.getQueryHandler(query.getClass());
         return queryHandler.handle(query);
     }
 }

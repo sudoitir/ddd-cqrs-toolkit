@@ -6,6 +6,11 @@ import static io.vavr.control.Either.right;
 import io.vavr.control.Either;
 
 public class EitherResult {
+
+    private EitherResult() {
+        throw new IllegalArgumentException();
+    }
+
     public static <L, R> Either<L, R> announceFailure(L left) {
         return left(left);
     }

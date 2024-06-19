@@ -20,13 +20,13 @@ public class QueryRegistry {
     }
 
     @SuppressWarnings("unchecked")
-    public <R, C extends Query<R>> QueryHandler<R, C> getQueryHandler(Class<C> queryClass) {
+    public <R, Q extends Query<R>> QueryHandler<R, Q> getQueryHandler(Class<Q> queryClass) {
         QueryProvider<?> provider = queryProviderMap.get(queryClass);
         if (provider == null) {
             throw new IllegalArgumentException(
                     "No QueryHandler found for query class: " + queryClass);
         }
-        return (QueryHandler<R, C>) provider.get();
+        return (QueryHandler<R, Q>) provider.get();
     }
 
     private void initializeQueryProviders(ApplicationContext applicationContext) {

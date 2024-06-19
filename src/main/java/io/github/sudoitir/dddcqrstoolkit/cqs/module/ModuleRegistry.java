@@ -17,13 +17,12 @@ public class ModuleRegistry {
         List<AfterThrowingModule> newAfterThrowingExecutionModules = new ArrayList<>();
 
         for (BusModule module : modules) {
-            if (module instanceof BeforeExecutionModule) {
-                registerModule(newBeforeExecutionModules, (BeforeExecutionModule) module);
-            } else if (module instanceof AfterExecutionModule) {
-                registerModule(newAfterExecutionModules, (AfterExecutionModule) module);
-            } else if (module instanceof AfterThrowingModule) {
-                registerModule(newAfterThrowingExecutionModules,
-                        (AfterThrowingModule) module);
+            if (module instanceof BeforeExecutionModule beforeexecutionmodule) {
+                registerModule(newBeforeExecutionModules, beforeexecutionmodule);
+            } else if (module instanceof AfterExecutionModule afterExecutionModule) {
+                registerModule(newAfterExecutionModules, afterExecutionModule);
+            } else if (module instanceof AfterThrowingModule afterThrowingModule) {
+                registerModule(newAfterThrowingExecutionModules, afterThrowingModule);
             } else {
                 throw new UnsupportedOperationException(
                         MessageFormat.format("Module type {0} not supported!",

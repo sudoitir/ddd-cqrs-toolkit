@@ -2,7 +2,6 @@ package io.github.sudoitir.dddcqrstoolkit.valueobject;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Objects;
 
 public record Version(long version) implements Comparable<Version>, Serializable {
 

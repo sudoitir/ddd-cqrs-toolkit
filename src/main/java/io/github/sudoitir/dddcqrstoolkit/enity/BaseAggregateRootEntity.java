@@ -27,4 +27,27 @@ public abstract class BaseAggregateRootEntity<ID extends Serializable> extends B
     public void incrementVersion() {
         this.version = this.version.increment();
     }
+
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof BaseAggregateRootEntity<?> that)) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        return getVersion().equals(that.getVersion());
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + getVersion().hashCode();
+        return result;
+    }
 }

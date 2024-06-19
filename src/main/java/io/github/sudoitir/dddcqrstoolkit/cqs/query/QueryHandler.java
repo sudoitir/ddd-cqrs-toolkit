@@ -1,6 +1,6 @@
 package io.github.sudoitir.dddcqrstoolkit.cqs.query;
 
-public interface QueryHandler<R, C extends Query<R>> {
+public interface QueryHandler<R, Q extends Query<R>> {
 
-    R handle(C query);
+    R handle(Q query);
 }
