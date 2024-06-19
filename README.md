@@ -13,6 +13,7 @@ using Spring Framework.
 ## Installation
 
 After installing the project with Maven using `mvn install`, add the following dependency to your `pom.xml`:
+
 ```xml
 
 <dependency>
@@ -24,21 +25,8 @@ After installing the project with Maven using `mvn install`, add the following d
 
 ## Getting Started
 
-### Configuration
-
 If needed, you can configure the Bus with more modules. For example, see the following configuration:
 [BusConfig.java](https://github.com/sudoitir/ddd-cqrs-toolkit/blob/93a26b140493fce42d514e7f23001fa348ac4554/src/main/java/io/github/sudoitir/dddcqrstoolkit/cqs/config/BusConfig.java)
-
-```java
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-
-@Configuration
-@ComponentScan (basePackages = "io.github.sudoitir.dddcqrstoolkit")
-public class AppConfig {
-}
-
-```
 
 ## Command Example
 
