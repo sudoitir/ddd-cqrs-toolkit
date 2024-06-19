@@ -1,7 +1,7 @@
 package io.github.sudoitir.dddcqrstoolkit.cqs.query;
 
 import io.github.sudoitir.dddcqrstoolkit.cqs.setup.*;
-import io.github.sudoitir.dddcqrstoolkit.valueobject.ULID;
+import io.github.sudoitir.dddcqrstoolkit.ulid.ULID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package io.github.sudoitir.dddcqrstoolkit.cqs.setup;
 
-import io.github.sudoitir.dddcqrstoolkit.valueobject.ULID;
+import io.github.sudoitir.dddcqrstoolkit.ulid.ULID;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
