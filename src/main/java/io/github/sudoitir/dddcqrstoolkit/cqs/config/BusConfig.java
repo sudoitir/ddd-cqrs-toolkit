@@ -6,10 +6,14 @@ import io.github.sudoitir.dddcqrstoolkit.cqs.module.ValidationModule;
 import jakarta.validation.Validator;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
 @Configuration
+@ComponentScan ("io.github.sudoitir.dddcqrstoolkit")
+@EnableAspectJAutoProxy (proxyTargetClass = true)
 public class BusConfig {
 
     @Bean
