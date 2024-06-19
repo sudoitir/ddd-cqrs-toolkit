@@ -1,6 +1,5 @@
 package io.github.sudoitir.dddcqrstoolkit.cqs.module;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -19,15 +18,12 @@ public class ModuleRegistry {
         for (BusModule module : modules) {
             if (module instanceof BeforeExecutionModule beforeexecutionmodule) {
                 newBeforeExecutionModules.add(beforeexecutionmodule);
-            } else if (module instanceof AfterExecutionModule afterExecutionModule) {
+            }
+            if (module instanceof AfterExecutionModule afterExecutionModule) {
                 newAfterExecutionModules.add(afterExecutionModule);
-            } else if (module instanceof AfterThrowingModule afterThrowingModule) {
+            }
+            if (module instanceof AfterThrowingModule afterThrowingModule) {
                 newAfterThrowingExecutionModules.add(afterThrowingModule);
-
-            } else {
-                throw new UnsupportedOperationException(
-                        MessageFormat.format("Module type {0} not supported!",
-                                module.getClass().getSimpleName()));
             }
         }
 
