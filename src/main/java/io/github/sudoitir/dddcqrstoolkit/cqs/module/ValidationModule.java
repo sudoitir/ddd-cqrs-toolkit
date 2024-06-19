@@ -22,11 +22,6 @@ public class ValidationModule implements BeforeExecutionModule, BusTypeProvider 
     public void executeBefore(final Object arg) {
         Set<ConstraintViolation<Object>> violations = validator.validate(arg);
         if (!violations.isEmpty()) {
-            if (logger.isDebugEnabled()) {
-                violations.forEach(
-                        violation -> logger.error("Validation error on field '{}': {}", violation.getPropertyPath(),
-                                violation.getMessage()));
-            }
             throw new ConstraintViolationException(violations);
         }
     }
