@@ -1,4 +1,4 @@
-package io.github.sudoitir.dddcqrstoolkit.cqs.command.setup;
+package io.github.sudoitir.dddcqrstoolkit.cqs.setup;
 
 import io.github.sudoitir.dddcqrstoolkit.cqs.command.CommandHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,8 @@ public class CreateProductHandler implements CommandHandler<CreateProductResult,
 
     @Override
     public CreateProductResult handle(CreateProductCommand command) {
-        Product product = new Product(null, command.name());
+        Product product = new Product();
+        product.setName(command.name());
         Product savedProduct = productRepository.save(product);
         return new CreateProductResult(savedProduct.getId(), "Product created successfully");
     }

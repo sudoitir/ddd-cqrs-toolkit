@@ -1,6 +1,6 @@
 package io.github.sudoitir.dddcqrstoolkit.cqs.command;
 
-import io.github.sudoitir.dddcqrstoolkit.cqs.command.setup.*;
+import io.github.sudoitir.dddcqrstoolkit.cqs.setup.*;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -58,8 +58,7 @@ class CommandTest {
             commandBus.executeCommand(command);
             fail("Should have thrown an exception");
         } catch (ConstraintViolationException ignored) {
-
         }
-
     }
+
 }
