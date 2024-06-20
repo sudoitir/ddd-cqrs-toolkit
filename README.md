@@ -1,5 +1,12 @@
 # DDD CQRS Toolkit
 
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=sudoitir_ddd-cqrs-toolkit&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=sudoitir_ddd-cqrs-toolkit)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=sudoitir_ddd-cqrs-toolkit&metric=bugs)](https://sonarcloud.io/summary/new_code?id=sudoitir_ddd-cqrs-toolkit)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=sudoitir_ddd-cqrs-toolkit&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=sudoitir_ddd-cqrs-toolkit)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=sudoitir_ddd-cqrs-toolkit&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=sudoitir_ddd-cqrs-toolkit)
+
+
+
 A Java library for implementing Domain-Driven Design (DDD) and Command Query Responsibility Segregation (CQRS) patterns
 using Spring Framework.
 
