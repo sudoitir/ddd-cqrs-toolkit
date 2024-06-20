@@ -1,4 +1,4 @@
-package io.github.sudoitir.dddcqrstoolkit.enity;
+package io.github.sudoitir.dddcqrstoolkit.entity;
 
 import java.io.Serializable;
 import java.util.Objects;

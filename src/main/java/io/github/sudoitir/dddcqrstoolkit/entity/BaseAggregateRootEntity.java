@@ -1,4 +1,4 @@
-package io.github.sudoitir.dddcqrstoolkit.enity;
+package io.github.sudoitir.dddcqrstoolkit.entity;
 
 import io.github.sudoitir.dddcqrstoolkit.valueobject.Version;
 
