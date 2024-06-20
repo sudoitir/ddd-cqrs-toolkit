@@ -6,9 +6,10 @@ import java.util.List;
 import java.util.Optional;
 
 public abstract class BaseRepository<T, ID> {
+
     protected final JdbcTemplate jdbcTemplate;
 
-    public BaseRepository(JdbcTemplate jdbcTemplate) {
+    protected BaseRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
 

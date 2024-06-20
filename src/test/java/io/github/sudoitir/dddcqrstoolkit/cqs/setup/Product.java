@@ -1,6 +1,6 @@
 package io.github.sudoitir.dddcqrstoolkit.cqs.setup;
 
-import io.github.sudoitir.dddcqrstoolkit.enity.BaseAggregateRootEntity;
+import io.github.sudoitir.dddcqrstoolkit.entity.BaseAggregateRootEntity;
 import io.github.sudoitir.dddcqrstoolkit.ulid.ULID;
 
 public class Product extends BaseAggregateRootEntity<ULID> {
