@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-@StrategyKey(value = "key-0")
-public class CreateProductHandler implements CommandHandler<CreateProductResult, CreateProductCommand> {
+@StrategyKey(value = "key-1")
+public class CreateProductHandler1 implements CommandHandler<CreateProductResult, CreateProductCommand> {
 
     @Autowired
     private InMemoryProductRepository productRepository;
@@ -17,6 +17,6 @@ public class CreateProductHandler implements CommandHandler<CreateProductResult,
         Product product = new Product();
         product.setName(command.name());
         Product savedProduct = productRepository.save(product);
-        return new CreateProductResult(savedProduct.getId(), "Product created successfully 1");
+        return new CreateProductResult(savedProduct.getId(), "Product created successfully key-1");
     }
 }

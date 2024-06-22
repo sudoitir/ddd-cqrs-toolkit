@@ -10,7 +10,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.Import;
+import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.fail;
@@ -39,10 +42,14 @@ class CommandTest {
         String productName = "Test Product";
         CreateProductCommand command = new CreateProductCommand(productName);
 
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.addHeader("X-Strategy-Key", "key-1");
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
+
         CreateProductResult result = commandBus.executeCommand(command);
 
         assertThat(result).isNotNull();
-        assertThat(result.message()).isEqualTo("Product created successfully");
+        assertThat(result.message()).isEqualTo("Product created successfully key-1");
 
         Product savedProduct = productRepository.findById(result.productId()).orElseGet(Assertions::fail);
         assertThat(savedProduct.getName()).isEqualTo(productName);
@@ -64,6 +71,9 @@ class CommandTest {
     }
 
     private CreateProductResult setup() {
+        MockHttpServletRequest request = new MockHttpServletRequest();
+        request.addHeader("X-Strategy-Key", "key-1");
+        RequestContextHolder.setRequestAttributes(new ServletRequestAttributes(request));
         String productName = "Test Product";
         CreateProductCommand command = new CreateProductCommand(productName);
         return commandBus.executeCommand(command);
