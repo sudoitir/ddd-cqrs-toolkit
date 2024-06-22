@@ -1,15 +1,15 @@
 package io.github.sudoitir.dddcqrstoolkit.cqs.command;
 
 import io.github.sudoitir.dddcqrstoolkit.cqs.setup.*;
+import io.github.sudoitir.dddcqrstoolkit.cqs.strategy.HeaderBasedStrategyKeyProvider;
+import io.github.sudoitir.dddcqrstoolkit.cqs.strategy.StrategyKeyProvider;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.EnableAspectJAutoProxy;
-import org.springframework.context.annotation.Import;
+import org.springframework.context.annotation.*;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -28,6 +28,10 @@ class CommandTest {
     @Import ({CreateProductHandler.class, InMemoryProductRepository.class})
     @EnableAspectJAutoProxy (proxyTargetClass = true)
     public static class TestConfig {
+        @Bean
+        public StrategyKeyProvider strategyKeyProvider(HttpServletRequest httpServletRequest) {
+            return new HeaderBasedStrategyKeyProvider(httpServletRequest);
+        }
     }
 
 
