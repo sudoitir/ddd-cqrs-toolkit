@@ -6,7 +6,7 @@
 
   <groupId>io.github.sudoitir</groupId>
   <artifactId>dddcqrstoolkit</artifactId>
-  <version>1.2.2</version>
+  <version>1.2.3</version>
   <name>DDD-CQRS Toolkit</name>
   <description>DDD-CQRS Toolkit</description>
   <url>http://github.com/sudoitir/ddd-cqrs-toolkit</url>

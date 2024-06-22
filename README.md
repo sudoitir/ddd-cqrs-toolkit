@@ -33,15 +33,14 @@ strategy key. This is particularly useful when multiple implementations of a com
 
 ## Installation
 
-After installing the project with Maven using `mvn install`, add the following dependency to
-your `pom.xml`:
+Add the following dependency to your `pom.xml`:
 
 ```xml
 
 <dependency>
   <groupId>io.github.sudoitir</groupId>
   <artifactId>dddcqrstoolkit</artifactId>
-  <version>1.0.0</version>
+  <version>1.2.3</version>
 </dependency>
 ```
 
