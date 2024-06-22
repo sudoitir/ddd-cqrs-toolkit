@@ -6,16 +6,26 @@
 
   <groupId>io.github.sudoitir</groupId>
   <artifactId>dddcqrstoolkit</artifactId>
-  <version>1.0.0</version>
+  <version>1.2.0</version>
   <name>DDD-CQRS Toolkit</name>
   <description>DDD-CQRS Toolkit</description>
+  <url>https://github.com/sudoitir/ddd-cqrs-toolkit</url>
+
 
   <developers>
     <developer>
-      <id>sudoit</id>
+      <id>sudoitir</id>
       <name>Mahdi Amirabdollahi</name>
+      <email>sudoit.ir@gmail.com</email>
     </developer>
   </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/sudoitir/ddd-cqrs-toolkit.git</connection>
+    <developerConnection>scm:git:ssh://github.com:sudoitir/ddd-cqrs-toolkit.git
+    </developerConnection>
+    <url>https://github.com/sudoitir/ddd-cqrs-toolkit</url>
+  </scm>
 
   <properties>
     <java.version>17</java.version>
@@ -203,6 +213,46 @@
           </dependency>
         </dependencies>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-gpg-plugin</artifactId>
+        <version>3.2.4</version>
+        <executions>
+          <execution>
+            <id>sign-artifacts</id>
+            <phase>verify</phase>
+            <goals>
+              <goal>sign</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.4.0</version>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <version>3.2.1</version>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
     <pluginManagement>
       <plugins>
@@ -214,5 +264,17 @@
       </plugins>
     </pluginManagement>
   </build>
+
+  <distributionManagement>
+    <repository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+    </repository>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+    </snapshotRepository>
+  </distributionManagement>
+
 
 </project>
