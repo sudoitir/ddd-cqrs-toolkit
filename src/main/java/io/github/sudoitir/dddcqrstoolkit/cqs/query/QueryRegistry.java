@@ -1,21 +1,28 @@
 package io.github.sudoitir.dddcqrstoolkit.cqs.query;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.core.GenericTypeResolver;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.core.GenericTypeResolver;
 
 /**
  * Registry holds the mapping between a query and its handler. The registry should always be
  * injected, by the spring framework.
  */
-public class QueryRegistry {
+public class QueryRegistry implements ApplicationListener<ContextRefreshedEvent> {
 
     private final Map<Class<? extends Query<?>>, QueryProvider<?>> queryProviderMap = new HashMap<>();
 
-    public QueryRegistry(ApplicationContext applicationContext) {
-        initializeQueryProviders(applicationContext);
+    public QueryRegistry() {
+    }
+
+    @Override
+    public void onApplicationEvent(final ContextRefreshedEvent event) {
+        queryProviderMap.clear();
+        initializeQueryProviders(event.getApplicationContext());
+
     }
 
     @SuppressWarnings("unchecked")
