@@ -6,11 +6,18 @@
 
   <groupId>io.github.sudoitir</groupId>
   <artifactId>dddcqrstoolkit</artifactId>
-  <version>1.2.1</version>
+  <version>1.2.2</version>
   <name>DDD-CQRS Toolkit</name>
   <description>DDD-CQRS Toolkit</description>
-  <url>https://github.com/sudoitir/ddd-cqrs-toolkit</url>
+  <url>http://github.com/sudoitir/ddd-cqrs-toolkit</url>
 
+  <licenses>
+    <license>
+      <name>The Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
 
   <developers>
     <developer>
@@ -24,7 +31,7 @@
     <connection>scm:git:git://github.com/sudoitir/ddd-cqrs-toolkit.git</connection>
     <developerConnection>scm:git:ssh://github.com:sudoitir/ddd-cqrs-toolkit.git
     </developerConnection>
-    <url>https://github.com/sudoitir/ddd-cqrs-toolkit</url>
+    <url>http://github.com/sudoitir/ddd-cqrs-toolkit</url>
   </scm>
 
   <properties>
@@ -241,10 +248,6 @@
                 <goals>
                   <goal>sign</goal>
                 </goals>
-                <configuration>
-                  <keyname>${gpg.keyname}</keyname>
-                  <passphraseServerId>${gpg.keyname}</passphraseServerId>
-                </configuration>
               </execution>
             </executions>
           </plugin>
