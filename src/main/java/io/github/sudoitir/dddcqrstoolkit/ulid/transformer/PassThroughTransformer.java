@@ -5,6 +5,13 @@ import io.github.sudoitir.dddcqrstoolkit.ulid.ULID;
 
 public class PassThroughTransformer implements ValueTransformer {
 
+    private PassThroughTransformer() {
+    }
+
+    public static PassThroughTransformer getInstance() {
+        return SingletonHelper.INSTANCE;
+    }
+
     public ULID transform(ULID ulid) {
         return ulid;
     }
@@ -14,13 +21,7 @@ public class PassThroughTransformer implements ValueTransformer {
     }
 
     private static class SingletonHelper {
+
         private static final PassThroughTransformer INSTANCE = new PassThroughTransformer();
-    }
-
-    public static PassThroughTransformer getInstance() {
-        return SingletonHelper.INSTANCE;
-    }
-
-    private PassThroughTransformer() {
     }
 }

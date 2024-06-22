@@ -1,7 +1,6 @@
 package io.github.sudoitir.dddcqrstoolkit.entity;
 
 import io.github.sudoitir.dddcqrstoolkit.valueobject.Version;
-
 import java.io.Serializable;
 
 public abstract class BaseAggregateRootEntity<ID extends Serializable> extends BaseEntity<ID> {
@@ -17,18 +16,16 @@ public abstract class BaseAggregateRootEntity<ID extends Serializable> extends B
         this.version = version;
     }
 
-    public Version getVersion() {
-        return version;
-    }
-
-    public void setVersion(Version version) {
-        this.version = version;
-    }
-
     public void incrementVersion() {
         this.version = this.version.increment();
     }
 
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + getVersion().hashCode();
+        return result;
+    }
 
     @Override
     public boolean equals(final Object o) {
@@ -45,10 +42,11 @@ public abstract class BaseAggregateRootEntity<ID extends Serializable> extends B
         return getVersion().equals(that.getVersion());
     }
 
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + getVersion().hashCode();
-        return result;
+    public Version getVersion() {
+        return version;
+    }
+
+    public void setVersion(Version version) {
+        this.version = version;
     }
 }

@@ -1,9 +1,8 @@
 package io.github.sudoitir.dddcqrstoolkit.event;
 
 import io.github.sudoitir.dddcqrstoolkit.ulid.ULID;
-import org.springframework.context.ApplicationEvent;
-
 import java.time.Instant;
+import org.springframework.context.ApplicationEvent;
 
 public abstract class DomainEvent<E> extends ApplicationEvent {
 
@@ -18,7 +17,7 @@ public abstract class DomainEvent<E> extends ApplicationEvent {
     public abstract Instant getWhen();
 
     @Override
-    @SuppressWarnings ("unchecked")
+    @SuppressWarnings("unchecked")
     public E getSource() {
         return (E) super.getSource();
     }

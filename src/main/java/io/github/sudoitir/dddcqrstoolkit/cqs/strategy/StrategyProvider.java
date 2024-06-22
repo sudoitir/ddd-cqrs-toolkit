@@ -25,6 +25,13 @@ public final class StrategyProvider {
     }
 
     @Override
+    public int hashCode() {
+        int result = arg.hashCode();
+        result = 31 * result + (strategyKey != null ? strategyKey.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public boolean equals(final Object o) {
         if (this == o) {
             return true;
@@ -39,13 +46,6 @@ public final class StrategyProvider {
             return false;
         }
         return Objects.equals(strategyKey, that.strategyKey);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = arg.hashCode();
-        result = 31 * result + (strategyKey != null ? strategyKey.hashCode() : 0);
-        return result;
     }
 
     @Override

@@ -2,13 +2,12 @@ package io.github.sudoitir.dddcqrstoolkit.cqs.command;
 
 import io.github.sudoitir.dddcqrstoolkit.cqs.strategy.StrategyKey;
 import io.github.sudoitir.dddcqrstoolkit.cqs.strategy.StrategyKeyProvider;
+import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.core.GenericTypeResolver;
-
-import java.util.*;
 
 
 /**
@@ -20,7 +19,7 @@ public class CommandRegistry implements ApplicationListener<ContextRefreshedEven
     private final Map<Class<? extends Command<?>>, CommandProvider<CommandHandler<?, ?>>> commandProviderMap
             = new HashMap<>();
 
-    @Autowired (required = false)
+    @Autowired(required = false)
     private StrategyKeyProvider strategyKeyProvider;
 
     public CommandRegistry() {
@@ -47,13 +46,13 @@ public class CommandRegistry implements ApplicationListener<ContextRefreshedEven
         }
     }
 
-    @SuppressWarnings ("unchecked")
+    @SuppressWarnings("unchecked")
     private <R, C extends Command<R>> CommandHandler<R, C> getCommandHandlerWithStrategy(
             CommandProvider<CommandHandler<?, ?>> commandProvider, String strategyKey) {
         return (CommandHandler<R, C>) commandProvider.get(strategyKey);
     }
 
-    @SuppressWarnings ("unchecked")
+    @SuppressWarnings("unchecked")
     private <R, C extends Command<R>> CommandHandler<R, C> getDefaultCommandHandler(
             CommandProvider<CommandHandler<?, ?>> commandProvider) {
         return (CommandHandler<R, C>) commandProvider.get();
@@ -73,7 +72,7 @@ public class CommandRegistry implements ApplicationListener<ContextRefreshedEven
         validateCommandHandlers(commandHandlersMap);
 
         commandHandlersMap.forEach((commandType, handlerClasses) ->
-            {
+        {
             CommandProvider<CommandHandler<?, ?>> commandHandlerProvider = new CommandProvider<>(
                     applicationContext);
 
@@ -84,63 +83,16 @@ public class CommandRegistry implements ApplicationListener<ContextRefreshedEven
             }
 
             commandProviderMap.put(commandType, commandHandlerProvider);
-            });
+        });
     }
-
-    private void handleMultipleHandlers(List<Class<CommandHandler<?, ?>>> handlerClasses,
-                                        CommandProvider<CommandHandler<?, ?>> commandHandlerProvider) {
-        Map<String, Class<CommandHandler<?, ?>>> strategyTypeMap = commandHandlerProvider.getStrategyTypeMap();
-        handlerClasses.forEach(handlerClass ->
-            {
-            StrategyKey annotation = handlerClass.getAnnotation(StrategyKey.class);
-            if (annotation != null) {
-                strategyTypeMap.put(annotation.value(), handlerClass);
-            }
-            });
-        commandHandlerProvider.setStrategy(true);
-    }
-
-    private void handleSingleHandler(List<Class<CommandHandler<?, ?>>> handlerClasses,
-                                     CommandProvider<CommandHandler<?, ?>> commandHandlerProvider) {
-        commandHandlerProvider.setStrategy(false);
-        if (!handlerClasses.isEmpty()) {
-            commandHandlerProvider.setType(handlerClasses.get(0));
-        }
-    }
-
 
     private void processCommandProviders(ApplicationContext applicationContext,
-                                         Map<Class<? extends Command<?>>, List<Class<CommandHandler<?, ?>>>> commandHandlersMap) {
+            Map<Class<? extends Command<?>>, List<Class<CommandHandler<?, ?>>>> commandHandlersMap) {
         String[] beanNames = applicationContext.getBeanNamesForType(CommandHandler.class);
         for (String beanName : beanNames) {
             registerCommandProvider(applicationContext, beanName, commandHandlersMap);
         }
     }
-
-    @SuppressWarnings ("unchecked")
-    private void registerCommandProvider(ApplicationContext applicationContext, String beanName,
-                                         Map<Class<? extends Command<?>>, List<Class<CommandHandler<?, ?>>>> commandHandlersMap) {
-        Class<CommandHandler<?, ?>> handlerClass = (Class<CommandHandler<?, ?>>) applicationContext.getType(
-                beanName);
-        if (handlerClass == null) {
-            throw new IllegalStateException(
-                    "Handler class for bean %s is null.".formatted(beanName));
-        }
-
-        Class<?>[] generics = GenericTypeResolver.resolveTypeArguments(handlerClass,
-                CommandHandler.class);
-        if (generics == null || generics.length != 2) {
-            throw new IllegalStateException(
-                    "Handler class %s does not have valid parameters.".formatted(
-                            handlerClass.getSimpleName()));
-        }
-
-        Class<? extends Command<?>> commandType = (Class<? extends Command<?>>) generics[1];
-
-        commandHandlersMap.computeIfAbsent(commandType, k -> new ArrayList<>()).add(handlerClass);
-
-    }
-
 
     private void validateCommandHandlers(Map<Class<? extends Command<?>>,
             List<Class<CommandHandler<?, ?>>>> commandHandlersMap) {
@@ -153,7 +105,8 @@ public class CommandRegistry implements ApplicationListener<ContextRefreshedEven
             List<Class<CommandHandler<?, ?>>> handlers = entry.getValue();
 
             if (handlers.size() > 1) {
-                List<Class<CommandHandler<?, ?>>> nonAnnotatedHandlers = getNonAnnotatedHandlers(handlers);
+                List<Class<CommandHandler<?, ?>>> nonAnnotatedHandlers = getNonAnnotatedHandlers(
+                        handlers);
                 if (strategyKeyProvider == null) {
                     throw new IllegalStateException("Multiple handlers found for command type "
                             + commandType.getSimpleName()
@@ -180,6 +133,51 @@ public class CommandRegistry implements ApplicationListener<ContextRefreshedEven
             }
 
         }
+
+    }
+
+    private void handleMultipleHandlers(List<Class<CommandHandler<?, ?>>> handlerClasses,
+            CommandProvider<CommandHandler<?, ?>> commandHandlerProvider) {
+        Map<String, Class<CommandHandler<?, ?>>> strategyTypeMap = commandHandlerProvider.getStrategyTypeMap();
+        handlerClasses.forEach(handlerClass ->
+        {
+            StrategyKey annotation = handlerClass.getAnnotation(StrategyKey.class);
+            if (annotation != null) {
+                strategyTypeMap.put(annotation.value(), handlerClass);
+            }
+        });
+        commandHandlerProvider.setStrategy(true);
+    }
+
+    private void handleSingleHandler(List<Class<CommandHandler<?, ?>>> handlerClasses,
+            CommandProvider<CommandHandler<?, ?>> commandHandlerProvider) {
+        commandHandlerProvider.setStrategy(false);
+        if (!handlerClasses.isEmpty()) {
+            commandHandlerProvider.setType(handlerClasses.get(0));
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private void registerCommandProvider(ApplicationContext applicationContext, String beanName,
+            Map<Class<? extends Command<?>>, List<Class<CommandHandler<?, ?>>>> commandHandlersMap) {
+        Class<CommandHandler<?, ?>> handlerClass = (Class<CommandHandler<?, ?>>) applicationContext.getType(
+                beanName);
+        if (handlerClass == null) {
+            throw new IllegalStateException(
+                    "Handler class for bean %s is null.".formatted(beanName));
+        }
+
+        Class<?>[] generics = GenericTypeResolver.resolveTypeArguments(handlerClass,
+                CommandHandler.class);
+        if (generics == null || generics.length != 2) {
+            throw new IllegalStateException(
+                    "Handler class %s does not have valid parameters.".formatted(
+                            handlerClass.getSimpleName()));
+        }
+
+        Class<? extends Command<?>> commandType = (Class<? extends Command<?>>) generics[1];
+
+        commandHandlersMap.computeIfAbsent(commandType, k -> new ArrayList<>()).add(handlerClass);
 
     }
 

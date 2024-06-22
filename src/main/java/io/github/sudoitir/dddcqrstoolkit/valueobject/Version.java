@@ -15,12 +15,12 @@ public record Version(int version) implements Comparable<Version>, Serializable 
         }
     }
 
-    public Version increment() {
-        return new Version(this.version + 1);
-    }
-
     public static Version zero() {
         return new Version(0);
+    }
+
+    public Version increment() {
+        return new Version(this.version + 1);
     }
 
     @Override

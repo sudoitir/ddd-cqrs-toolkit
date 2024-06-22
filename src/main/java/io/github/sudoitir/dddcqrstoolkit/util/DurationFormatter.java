@@ -1,10 +1,10 @@
 package io.github.sudoitir.dddcqrstoolkit.util;
 
+import static java.util.concurrent.TimeUnit.*;
+
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
-
-import static java.util.concurrent.TimeUnit.*;
 
 /**
  * DurationFormatter formats duration with its abbreviate time unit.

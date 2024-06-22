@@ -14,6 +14,10 @@ public class CommandProvider<H extends CommandHandler<?, ?>> {
     private Class<H> type;
     private Boolean isStrategy;
 
+    CommandProvider(ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
+
     public Map<String, Class<H>> getStrategyTypeMap() {
         return strategyTypeMap;
     }
@@ -24,10 +28,6 @@ public class CommandProvider<H extends CommandHandler<?, ?>> {
 
     public void setStrategy(final Boolean strategy) {
         isStrategy = strategy;
-    }
-
-    CommandProvider(ApplicationContext applicationContext) {
-        this.applicationContext = applicationContext;
     }
 
     public H get() {
@@ -47,6 +47,13 @@ public class CommandProvider<H extends CommandHandler<?, ?>> {
         return isStrategy;
     }
 
+    @Override
+    public int hashCode() {
+        int result = strategyTypeMap.hashCode();
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (isStrategy != null ? isStrategy.hashCode() : 0);
+        return result;
+    }
 
     @Override
     public boolean equals(final Object o) {
@@ -66,14 +73,6 @@ public class CommandProvider<H extends CommandHandler<?, ?>> {
             return false;
         }
         return Objects.equals(isStrategy, that.isStrategy);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = strategyTypeMap.hashCode();
-        result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (isStrategy != null ? isStrategy.hashCode() : 0);
-        return result;
     }
 
     @Override

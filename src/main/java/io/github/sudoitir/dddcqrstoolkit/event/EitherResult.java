@@ -1,9 +1,9 @@
 package io.github.sudoitir.dddcqrstoolkit.event;
 
-import io.vavr.control.Either;
-
 import static io.vavr.control.Either.left;
 import static io.vavr.control.Either.right;
+
+import io.vavr.control.Either;
 
 public class EitherResult {
 

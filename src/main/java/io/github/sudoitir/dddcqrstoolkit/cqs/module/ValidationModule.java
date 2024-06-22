@@ -3,10 +3,9 @@ package io.github.sudoitir.dddcqrstoolkit.cqs.module;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Validator;
+import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Set;
 
 public class ValidationModule implements BeforeExecutionModule, BusTypeProvider {
 

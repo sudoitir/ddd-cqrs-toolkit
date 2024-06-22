@@ -1,7 +1,6 @@
 package io.github.sudoitir.dddcqrstoolkit.cqs.module;
 
 import io.micrometer.core.instrument.Counter;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 

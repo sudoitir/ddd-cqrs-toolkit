@@ -25,16 +25,6 @@ public class QueryRegistry implements ApplicationListener<ContextRefreshedEvent>
 
     }
 
-    @SuppressWarnings("unchecked")
-    public <R, Q extends Query<R>> QueryHandler<R, Q> getQueryHandler(Class<Q> queryClass) {
-        QueryProvider<?> provider = queryProviderMap.get(queryClass);
-        if (provider == null) {
-            throw new IllegalArgumentException(
-                    "No QueryHandler found for query class: " + queryClass);
-        }
-        return (QueryHandler<R, Q>) provider.get();
-    }
-
     private void initializeQueryProviders(ApplicationContext applicationContext) {
         String[] beanNames = applicationContext.getBeanNamesForType(QueryHandler.class);
         for (String beanName : beanNames) {
@@ -54,6 +44,16 @@ public class QueryRegistry implements ApplicationListener<ContextRefreshedEvent>
                         (Class<? extends QueryHandler<?, ?>>) handlerClass));
             }
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    public <R, Q extends Query<R>> QueryHandler<R, Q> getQueryHandler(Class<Q> queryClass) {
+        QueryProvider<?> provider = queryProviderMap.get(queryClass);
+        if (provider == null) {
+            throw new IllegalArgumentException(
+                    "No QueryHandler found for query class: " + queryClass);
+        }
+        return (QueryHandler<R, Q>) provider.get();
     }
 
 
