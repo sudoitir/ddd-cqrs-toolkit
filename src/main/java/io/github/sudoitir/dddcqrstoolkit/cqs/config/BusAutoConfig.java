@@ -8,16 +8,12 @@ import io.github.sudoitir.dddcqrstoolkit.cqs.module.ModuleRegistry;
 import io.github.sudoitir.dddcqrstoolkit.cqs.module.ValidationModule;
 import io.github.sudoitir.dddcqrstoolkit.cqs.query.QueryRegistry;
 import io.github.sudoitir.dddcqrstoolkit.cqs.query.SpringQueryBus;
-import io.github.sudoitir.dddcqrstoolkit.cqs.strategy.HeaderBasedStrategyKeyProvider;
-import io.github.sudoitir.dddcqrstoolkit.cqs.strategy.StrategyKeyProvider;
 import io.github.sudoitir.dddcqrstoolkit.event.EventPublisher;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Validator;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
@@ -53,12 +49,6 @@ public class BusAutoConfig {
     @Bean
     public EventPublisher eventPublisher(ApplicationEventPublisher applicationEventPublisher) {
         return new EventPublisher(applicationEventPublisher);
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public StrategyKeyProvider strategyKeyProvider(HttpServletRequest httpServletRequest) {
-        return new HeaderBasedStrategyKeyProvider(httpServletRequest);
     }
 
     @Bean
