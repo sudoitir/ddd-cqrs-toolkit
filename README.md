@@ -1,6 +1,5 @@
 # DDD CQRS Toolkit
 
-[![Java CI with Maven](https://github.com/sudoitir/ddd-cqrs-toolkit/actions/workflows/maven.yml/badge.svg?branch=master)](https://github.com/sudoitir/ddd-cqrs-toolkit/actions/workflows/maven.yml)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=sudoitir_ddd-cqrs-toolkit&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=sudoitir_ddd-cqrs-toolkit)
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=sudoitir_ddd-cqrs-toolkit&metric=bugs)](https://sonarcloud.io/summary/new_code?id=sudoitir_ddd-cqrs-toolkit)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=sudoitir_ddd-cqrs-toolkit&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=sudoitir_ddd-cqrs-toolkit)
@@ -34,6 +33,7 @@ strategy key. This is particularly useful when multiple implementations of a com
 ## Installation
 
 Add the following dependency to your `pom.xml`:
+[Central Sonatype](https://central.sonatype.com/artifact/io.github.sudoitir/dddcqrstoolkit/overview)
 
 ```xml
 
